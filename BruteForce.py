@@ -6,7 +6,7 @@
 # -- yield_empty:   If true an empty string will be generated first.
 # Note that "initial" and "step" can be used for a multithreaded implementation
 
-def bruteforce(charset,max_length,initial=1,step=1,yield_empty=True):   
+def bruteforce(charset : str|list,max_length : int,initial : int =1,step : int =1,yield_empty : bool =True):   
     # Check the validity of input
     if not (type(charset) in [str,list] and type(max_length)==int and type(initial)==int and type(step)==int): return
     carset_length = len(charset)
