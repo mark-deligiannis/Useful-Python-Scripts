@@ -1,12 +1,22 @@
-# A password generator. Arguments:
-# -- charset:       The character set. Must be either string "abc" or list ["common ","word "]
-# -- max_length:    The maximum length of the generated password
-# -- initial:       The index of the starting password (e.g. for "abc": 1 -> "a", 2 -> "b" and 4 -> "aa")
-# -- step:          The stride (e.g. 1 -> a,b,c,aa...   2 -> a,c,ab,... )
-# -- yield_empty:   If true an empty string will be generated first.
-# Note that "initial" and "step" can be used for a multithreaded implementation
-
 def bruteforce(charset : str|list[str],max_length : int,initial : int =1,step : int =1,yield_empty : bool =True) -> str:
+    '''
+    ## A password generator
+
+    Parameters
+    ----------
+    charset : str|list[str]
+        The character set. Pass string for classic brute-force attack and list for dictionary attack.
+    max_length : int
+        The maximum length of the generated password.
+    initial : int
+        The index of the starting password (e.g. for "abc": 1 -> "a", 2 -> "b" and 4 -> "aa").
+    step : int
+        The stride (e.g. 1 -> a,b,c,d...   2 -> a,c,e,... ).
+    yield_empty : bool
+        If true an empty string will be generated first.
+    
+    Note that "initial" and "step" can be used for a multithreaded implementation
+    '''
     # Check the validity of input
     if not (type(charset) in [str,list] and type(max_length)==int and type(initial)==int and type(step)==int): return
     carset_length = len(charset)
