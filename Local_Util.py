@@ -58,10 +58,22 @@ def bruteforce(charset : str|list[str],max_length : int,initial : int =1,step : 
                 carry_in //= carset_length
                 if carry_in == 0: break
 
+def progressbar(progress : int|float, total : int|float, width : int=50, fill_char : str ="█") -> None:
+    '''
+    ## A simple progress bar
 
-# For testing purposes
-# Example usage: .\BruteForce.py abc 4 1 2 F
-import sys
-for i,x in enumerate(bruteforce(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),sys.argv[5][0]=='T')):
-    end = '\n' if i%10==9 else '\t'
-    print(x, end=end)
+    Parameters
+    ----------
+    progress : int|float
+        The amount of progress achieved. MUST be positive or zero.
+    total : int|float
+        The amount of total progress. MUST be positive.
+    width : int
+        The width of the progress bar. More specifically, the number of characters between the brackets of the progress bar.
+    fill_char: str
+        The character used to fill the progress bar.
+    '''
+    progress = min(progress, total)
+    part = progress/total
+    n_fill = int(part*width)
+    print(f"\r["+ n_fill*fill_char + (width-n_fill)*" " + f"] {part*100:5.2f}%", end="")
