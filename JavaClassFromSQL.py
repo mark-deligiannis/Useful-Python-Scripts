@@ -38,7 +38,7 @@ def create_file(entry, out_filename, import_date):
 
     # Getters
     for attr_name,attr_type in entry[3:]:
-        out_lines.append(f"\tpublic {attr_type} get{attr_name.capitalize()}() " +
+        out_lines.append(f"\tpublic {attr_type} get{attr_name[0].upper() + attr_name[1:]}() " +
                          '{\n\t\treturn ' + attr_name + ";\n\t}\n\n")
     
     out_lines.append("}")
@@ -78,7 +78,7 @@ for i,entry in enumerate(entries):
             attr_type = "Integer"
         elif ("char(" in line or " text " in line):
             attr_type = "String"
-        elif (" date " in line or " datetime " in line):
+        elif (" date " in line or " datetime " in line or " timestamp " in line):
             attr_type = "Date"
         else:
             attr_type = input(f"Encountered problem: Attribute with name {attr_name}.\nPlease specify type maually:")
